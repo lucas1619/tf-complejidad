@@ -1,20 +1,22 @@
 import gc
-
-
 class Node:
     def __init__(self, value=None):
         self.value = value
         self.next = None
         self.prev = None
-
-
 class DoubleLinkedList:
 
     def __init__(self):
         self.start = Node()
         self.end = Node()
         self.size = 0
-
+    def __contains__(self, value):
+      aux = self.start
+      while aux != None:
+        if aux.value == value:
+          return True
+        aux = aux.next
+      return False
     def __len__(self):
         return self.size
 

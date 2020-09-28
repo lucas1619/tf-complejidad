@@ -1,6 +1,4 @@
 from listaenlazada import DoubleLinkedList
-
-
 class Pensamiento:
     def __init__(self, Grafo, indica):
         self.grafo = Grafo
@@ -18,11 +16,11 @@ class Pensamiento:
         ruta = DoubleLinkedList()
         ruta.push_front(end)
 
-        distancia = [float("Inf") for x in range(self.grafo.q_nodos)]
+        distancia = [float("Inf") for x in range(len(self.grafo))]
 
-        previo = [-1 for x in range(self.grafo.q_nodos)]
+        previo = [-1 for x in range(len(self.grafo))]
         distancia[start] = 0
-        for iteracion in range(self.grafo.q_nodos - 1):
+        for iteracion in range(len(self.grafo) - 1):
             for actual, nodo in enumerate(self.grafo):
                 for adyacente in nodo:
                     if distancia[actual] + 1 < distancia[adyacente]:
