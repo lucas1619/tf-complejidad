@@ -24,18 +24,33 @@ class Quoridor:
         pygame.display.set_caption(u'Jessie uwu')
         pantalla = pygame.display.set_mode((792, 792))
         clock = pygame.time.Clock()
-        is_running = True or self.ganador == False
+        is_running = True
+        pantalla.fill(blanco)
+        self.tablero.graficar_tablero(pantalla, pygame)
+        for jugador in self.lista_de_jugadores:
+            jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam)
+        pygame.display.update()
+        pygame.time.wait(3000)  
         while is_running:
+            if(self.ganador == True):
+                break
             clock.tick(7)
             for event in pygame.event.get():
-                pantalla.fill(blanco)
-                self.tablero.graficar_tablero(pantalla, pygame)
-                for jugador in self.lista_de_jugadores:
-                    jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam)
-                self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % 2])
-                self.ganador = self.lista_de_jugadores[self.turno].mueve()
-                self.turno = (self.turno + 1) % 2
-                pygame.display.update()
                 if event.type == pygame.QUIT:
-                    is_running = False                    
+                    is_running = False  
+            pantalla.fill(blanco)
+            self.tablero.graficar_tablero(pantalla, pygame)
+            for jugador in self.lista_de_jugadores:
+                jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam)
+            self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % 2])
+            self.ganador = self.lista_de_jugadores[self.turno].mueve()
+            self.turno = (self.turno + 1) % 2
+            pygame.display.update()
+
+        pantalla.fill(blanco)
+        self.tablero.graficar_tablero(pantalla, pygame)
+        for jugador in self.lista_de_jugadores:
+            jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam)
+        pygame.display.update()        
+        pygame.time.wait(3000)                              
         pygame.quit()        
