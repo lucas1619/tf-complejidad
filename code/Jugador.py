@@ -1,6 +1,4 @@
 from Pensamiento import Pensamiento
-
-
 class Jugador:
     def __init__(self, indica, Grafo, nodostart, nodogoal):
         self.nodogoal = nodogoal

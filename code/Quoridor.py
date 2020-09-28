@@ -1,5 +1,5 @@
-from Tablero import Tablero
-from Jugador import Jugador
+import Tablero
+import Jugador
 
 
 class Quoridor:
