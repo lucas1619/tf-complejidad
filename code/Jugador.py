@@ -4,14 +4,16 @@ class Jugador:
         self.nodogoal = nodogoal
         self.pensamiento = Pensamiento(Grafo, indica)
         self.lista_ruta = []
+        self.lista_ruta_rival = []
         self.current = nodostart
 
-    def piensa(self):
+    def piensa(self, rival):
         self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
-        #lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
+        #self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
 
     def mueve(self):
-        self.current = self.lista_ruta[1]
+        self.current = self.lista_ruta[0]
+        self.lista_ruta.pop(0)
         return self.current == self.nodogoal
 
     def graficar(self, pantalla, pygame, n, lado):
