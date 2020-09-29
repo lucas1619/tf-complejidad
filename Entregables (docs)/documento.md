@@ -164,11 +164,28 @@ La metodología que usamos para resolver este problema se divide en tres partes:
 3. Tests y Experimentos
 
 ### Investigación:
-Para dar inicio a la investigación, primero indagamos acerca del problema, debido a ello pudimos observar que debíamos hacer uso de algoritmos relacionados a la busqueda del camino más corto. Usaremos estos algoritmos para el movimiento de los peones a través de los obstáculos  o ,en otras palabras, Pathfinding. Luego, buscamos los algoritmos más eficientes para nuestro problema los cuales fueron A* y ACO.
+Para dar inicio a la investigación, primero indagamos acerca del problema, debido a ello pudimos observar que debíamos hacer uso de algoritmos relacionados a la busqueda del camino más corto. Usaremos estos algoritmos para el movimiento de los peones a través de los obstáculos  o ,en otras palabras, Pathfinding. Asimismo, buscamos algoritmos que podrían ser útiles para nuestro trabajo, los que encontramos fueron A*, Dijkstra y Bellman Ford. Además, se hizo uso de la libreria pygames, para la parte gráfica del juego (representación del tablero y peones).
 
 
 ### Desarrollo:
-Esta parte la iremos escribiendo a medida que desarrollemos el trabajo
+
+En primer lugar, implementamos una lista doblemente enlazada, lo siguiente fue implementar un grafo, el cual era la combinación de un vector de listas doblemente enlazadas y dentro de ello, una función que permitía que las conexiones entre nodos se almacenen como listas de adyacencia. Elegimos implementarlo de esta manera, debido a que deseamos un acceso constante a los nodos, eso lo obtenemos del vector de listas doblemente enlazadas y además, un almacenado dinámico a sus adyacentes y la lista doblemente enlazada permite ello. De tal manera, que las operaciones de acceso e insertado en nuestro juego sean de O(1)
+
+En segundo lugar, nuestro  objetivo fue implementar los algoritmos de path-finding. Con el proposito de avanzar el trabajo de manera más rápida, al ser un grupo de 3 integrantes, cada integrante implemento uno de los algoritmos de path-finding de acuerdo al grafo construido previamente. Al testear que los algoritmos funcionaban y encuentraban las rutas adecuadas pasamos al siguiente paso.
+
+En tercer lugar, separamos el código de manera estructurada y ordenada, debido a que cada uno trabajo por su cuenta, el código estaba desordenado y decidimos ordenarlo en clases, las clases que identificamos fueron:
+
+- Clase Lista Doblemente Enlazada (clase que contiene la implementación de la lista)
+- Clase Tablero (clase que contiene la implementación del grafo entre otras funcionalidades del mismo)
+- Clase Jugador (clase que contiene todas las funcionalidades del peon del juego)
+- Clase Pensamiento (clase que contiene los algoritmos que seguirán los peones)
+- Clase Quoridor (clase que contiene todo el juego)
+
+En cuarto lugar, implementamos el pensamiento del jugador, ejemplo: cuando saltar, cuando cambiar de ruta, etc. 
+
+En quinto lugar, implementamos la parte gráfica con la ayuda de la librería pygames. 
+
+En último lugar, testeamos el juego de distintas maneras, lo cual nos confirmo que los algoritmos funcionaban de manera correcta 
 
 ### Tests y Experimentos:
 
@@ -187,4 +204,3 @@ Mientras que para la segunda entrada tomaremos los valores de la siguiente lista
 * 100ms
 * 500ms
 * 1s
-
