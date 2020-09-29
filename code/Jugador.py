@@ -14,9 +14,14 @@ class Jugador:
             self.primero = False
         #self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
 
-    def mueve(self):
+    def mueve(self, enemigo):
         self.current = self.lista_ruta[0]
         self.lista_ruta.pop(0)
+        if self.current == enemigo.current:
+        #  if grafo.conectados(self.current + n, self.current) or
+        # se va a la siguiente
+        # si es false no validamos aun
+
         return self.current == self.nodogoal
 
     def graficar(self, pantalla, pygame, n, lado):
