@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git/git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git/git/git" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git/git/tf-complejidad" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/git/git/tf-complejidad/git" vcs="Git" />
+  </component>
+</project>
