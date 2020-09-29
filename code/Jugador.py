@@ -18,10 +18,7 @@ class Jugador:
         self.current = self.lista_ruta[0]
         self.lista_ruta.pop(0)
         if self.current == enemigo.current:
-        #  if grafo.conectados(self.current + n, self.current) or
-        # se va a la siguiente
-        # si es false no validamos aun
-
+            #ACA DEBE HACER EL SALTO
         return self.current == self.nodogoal
 
     def graficar(self, pantalla, pygame, n, lado):

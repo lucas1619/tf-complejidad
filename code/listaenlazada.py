@@ -13,8 +13,8 @@ class DoubleLinkedList:
     def __contains__(self, value):
         aux = self.start
         while aux != None:
-        if aux.value == value:
-            return True
+            if aux.value == value:
+                return True
         aux = aux.next
         return False
     def __len__(self):
