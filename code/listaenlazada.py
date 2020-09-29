@@ -11,12 +11,12 @@ class DoubleLinkedList:
         self.end = Node()
         self.size = 0
     def __contains__(self, value):
-      aux = self.start
-      while aux != None:
+        aux = self.start
+        while aux != None:
         if aux.value == value:
-          return True
+            return True
         aux = aux.next
-      return False
+        return False
     def __len__(self):
         return self.size
 
