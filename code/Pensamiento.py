@@ -27,7 +27,7 @@ class Pensamiento:
                         distancia[adyacente] = distancia[actual] + 1
                         previo[adyacente] = actual
         anterior = previo[end]
-        while anterior != -1:
+        while anterior != start:
             ruta.push_front(anterior)
             anterior = previo[anterior]
         return list(ruta)
