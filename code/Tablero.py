@@ -29,12 +29,12 @@ class Tablero:
         return nodo2 in self.grafo[nodo1]
 
     def validar_direccion(self,nodoI,nodoF):
-      validar = nodoI-nodoF
-      if (validar == self.n):
-          return 0
-      elif (validar == -self.n):
-          return  1
-      elif (validar == -1):
-          return 2
-      elif (validar == 1):
-          return 3
+        validar = nodoI-nodoF
+        if (validar == self.n):
+            return 0
+        elif (validar == -self.n):
+            return  1
+        elif (validar == -1):
+            return 2
+        elif (validar == 1):
+            return 3
