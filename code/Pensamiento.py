@@ -9,6 +9,7 @@ class Node_Astar:
         self.globhal = globhal
         self.visited = visited
 
+
 class Pensamiento:
     def __init__(self, Grafo, indica):
         self.grafo = Grafo
@@ -86,13 +87,16 @@ class Pensamiento:
                 if sum < grafoo[neighbor].local:
                     grafoo[neighbor].padre = current
                     grafoo[neighbor].local = sum
-                    c = neighbor % int(len(self.grafo) ** 0.5) + neighbor // int(len(self.grafo) ** 0.5)
+                    c = neighbor % int(len(self.grafo) ** 0.5) + \
+                        neighbor // int(len(self.grafo) ** 0.5)
                     f = neighbor // int(len(self.grafo) ** 0.5)
-                    grafoo[neighbor].globhal = grafoo[neighbor].local + heuristic((c, f), (c1, f1))
+                    grafoo[neighbor].globhal = grafoo[neighbor].local + \
+                        heuristic((c, f), (c1, f1))
         ruta.append(goal)
         ruta.pop(0)
         ruta.pop(0)
         return ruta
+
     def dicionario(self):
         dic = []
         listaN = [x for x in range(len(self.grafo))]
@@ -101,13 +105,14 @@ class Pensamiento:
             dic.append(data)
         diccio = (dict(zip(listaN, dic)))
         return diccio
+
     def dijkstra(self, start, goal):
 
         grafo = self.dicionario()
 
-        S = [];
-        Queue = [];
-        anterior = [0 for i in range(max(grafo) + 1)];
+        S = []
+        Queue = []
+        anterior = [0 for i in range(max(grafo) + 1)]
         distancia = [0 for i in range(max(grafo) + 1)]
 
         for nodo in grafo:
