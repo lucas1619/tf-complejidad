@@ -1,5 +1,7 @@
 from listaenlazada import DoubleLinkedList
-negro= (0,0,0)
+negro = (0, 0, 0)
+
+
 class Tablero:
     def __init__(self, n):
         self.tam = 792/n
@@ -13,15 +15,19 @@ class Tablero:
             if i + n < n * n:
                 self.grafo[i].push_back(i + n)
                 self.grafo[i + n].push_back(i)
+
     def get_coord(self, value):
         coord = {"x": None, "y": None}
-        coord['y'] =  value//self.n
-        coord['x'] = value %self.n
-        return coord             
+        coord['y'] = value//self.n
+        coord['x'] = value % self.n
+        return coord
+
     def graficar_tablero(self, pantalla, pygame):
         coord = None
         for i, _ in enumerate(self.grafo):
             coord = self.get_coord(i)
-            pygame.draw.rect(pantalla, negro, (coord['x']*self.tam, coord['y']*self.tam, self.tam, self.tam), 1)
-    def conectados(self,nodo1,nodo2):
+            pygame.draw.rect(
+                pantalla, negro, (coord['x']*self.tam, coord['y']*self.tam, self.tam, self.tam), 1)
+
+    def conectados(self, nodo1, nodo2):
         return nodo2 in self.grafo[nodo1]
