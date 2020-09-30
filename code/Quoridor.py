@@ -36,13 +36,7 @@ class Quoridor:
                 self.lista_de_jugadores.append(
                     Jugador(3, self.tablero.grafo, (self.tablero.n * (self.tablero.n // 2 + 1)) - self.tablero.n,
                             (self.tablero.n * (self.tablero.n // 2 + 1))))
-<<<<<<< HEAD
     def test(self, alg):
-=======
-
-    def test(self, alg):
-        print("Comenzo")
->>>>>>> 6d399c5badc68c348bbeff81a5c62b81f0205048
         start_time = time.time()
         self.ganador = False
         self.turno = 0
@@ -52,12 +46,7 @@ class Quoridor:
             self.lista_de_jugadores[self.turno].piensa(
                 self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)], self.tablero)
             self.ganador = self.lista_de_jugadores[self.turno].mueve(
-<<<<<<< HEAD
                 self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)],
-=======
-                self.lista_de_jugadores[(self.turno + 1) %
-                                        len(self.lista_de_jugadores)],
->>>>>>> 6d399c5badc68c348bbeff81a5c62b81f0205048
                 self.tablero)
             self.turno = (self.turno + 1) % len(self.lista_de_jugadores)
         elapsed_time = time.time() - start_time
@@ -74,8 +63,7 @@ class Quoridor:
         pantalla.fill(blanco)
         self.tablero.graficar_tablero(pantalla, pygame)
         for i, jugador in enumerate(self.lista_de_jugadores):
-            jugador.graficar(pantalla, pygame, self.tablero.n,
-                            self.tablero.tam, colores[i])
+            jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam, colores[i])
         pygame.display.update()
         pygame.time.wait(3000)
         while is_running:
@@ -89,30 +77,16 @@ class Quoridor:
             pantalla.fill(blanco)
             self.tablero.graficar_tablero(pantalla, pygame)
             for i, jugador in enumerate(self.lista_de_jugadores):
-<<<<<<< HEAD
                 jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam, colores[i])
             self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)], self.tablero)
             self.ganador = self.lista_de_jugadores[self.turno].mueve(self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)],
                                                                      self.tablero)
-=======
-                jugador.graficar(pantalla, pygame, self.tablero.n,
-                                self.tablero.tam, colores[i])
-            self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(
-                self.turno + 1) % len(self.lista_de_jugadores)], self.tablero)
-            self.ganador = self.lista_de_jugadores[self.turno].mueve(self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)],
-                                                                    self.tablero)
->>>>>>> 6d399c5badc68c348bbeff81a5c62b81f0205048
             self.turno = (self.turno + 1) % len(self.lista_de_jugadores)
             pygame.display.update()
         pantalla.fill(blanco)
         self.tablero.graficar_tablero(pantalla, pygame)
         for i, jugador in enumerate(self.lista_de_jugadores):
-            jugador.graficar(pantalla, pygame, self.tablero.n,
-                            self.tablero.tam, colores[i])
+            jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam, colores[i])
         pygame.display.update()
         pygame.time.wait(3000)
-<<<<<<< HEAD
         pygame.quit()
-=======
-        pygame.quit()
->>>>>>> 6d399c5badc68c348bbeff81a5c62b81f0205048
