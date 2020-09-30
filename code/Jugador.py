@@ -1,8 +1,5 @@
 from Pensamiento import Pensamiento
-
 blue = (95, 158, 160)
-
-
 class Jugador:
     def __init__(self, indica, Grafo, nodostart, nodogoal):
         self.nodogoal = nodogoal
@@ -58,7 +55,7 @@ class Jugador:
         self.lista_ruta.pop(0)
         if self.current == enemigo.current:
             direccion = self.validar_direccion(inicial, self.current, tablero.n)
-            if direccion is 0:
+            if direccion == 0:
                 if self.current - tablero.n >= 0:
                     if tablero.conectados(self.current, self.current - tablero.n):
                         self.current -= tablero.n
@@ -68,7 +65,7 @@ class Jugador:
                     self.current += 1
                     self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
                     return self.current == self.nodogoal
-            elif direccion is 1:
+            elif direccion == 1:
                 if self.current + tablero.n < tablero.n:
                     if tablero.conectados(self.current, self.current + tablero.n):
                         self.current += tablero.n
@@ -78,12 +75,12 @@ class Jugador:
                     self.current += 1
                     self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
                     return self.current == self.nodogoal
-            elif direccion is 2:
+            elif direccion == 2:
                 if tablero.conectados(self.current, self.current + 1):
                     self.current += 1
                 else:
                     pass
-            elif direccion is 3:
+            elif direccion == 3:
                 if tablero.conectados(self.current, self.current - 1):
                     self.current -= 1
                 else:
