@@ -52,11 +52,11 @@ class Pensamiento:
             return node.globhal
 
         current = start
-        c = start % self.grafo.n + start // self.grafo.n
-        f = start // self.grafo.n
-        c1 = goal % self.grafo.n + goal // self.grafo.n
-        f1 = goal // self.grafo.n
-        grafoo = [Node_Astar(i) for i in range(self.grafo.n * self.grafo.n)]
+        c = start % len(self.grafo)**0.5 + start // len(self.grafo)**0.5
+        f = start // len(self.grafo)**0.5
+        c1 = goal % len(self.grafo)**0.5 + goal // len(self.grafo)**0.5
+        f1 = goal // len(self.grafo)**0.5
+        grafoo = [Node_Astar(i) for i in range(len(self.grafo))]
         grafoo[start].local = 0.0
         grafoo[start].globhal = heuristic((c, f), (c1, f1))
         not_tested_nodes = [grafoo[start]]
@@ -86,12 +86,11 @@ class Pensamiento:
                 if sum < grafoo[neighbor].local:
                     grafoo[neighbor].padre = current
                     grafoo[neighbor].local = sum
-                    c = neighbor % self.grafo.n + neighbor // self.grafo.n
-                    f = neighbor // self.grafo.n
-                    grafoo[neighbor].globhal = grafoo[neighbor].local + \
-                        heuristic((c, f), (c1, f1))
-
+                    c = neighbor % int(len(self.grafo) ** 0.5) + neighbor // int(len(self.grafo) ** 0.5)
+                    f = neighbor // int(len(self.grafo) ** 0.5)
+                    grafoo[neighbor].globhal = grafoo[neighbor].local + heuristic((c, f), (c1, f1))
         ruta.append(goal)
+        ruta.pop(0)
         ruta.pop(0)
         return ruta
 
