@@ -32,7 +32,6 @@ class Jugador:
         if len(self.lista_ruta) < len(self.lista_ruta_rival):
             return
         if self.alcostado(self.current, rival.current, tablero.n) is True:
-            print("llego :v")
             self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, rival.nodogoal)
             return
         if self.alcostado(self.lista_ruta[0], rival.current, tablero.n) is True:
@@ -100,6 +99,4 @@ class Jugador:
         y = self.current // n
         x1 = self.nodogoal % n
         y1 = self.nodogoal // n
-        if self.primero == False:
-            pygame.draw.rect(pantalla, blue, (x1 * lado, y1 * lado, lado, lado), 0)
         pygame.draw.ellipse(pantalla, color, (x * lado, y * lado, lado, lado), 0)
