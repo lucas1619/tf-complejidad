@@ -9,12 +9,24 @@ class Jugador:
         self.current = nodostart
         self.primero = True    
     def piensa(self, rival, tablero):
+        if self.primero == False:
+            print(f"actual {self.current}")
+            print(f"yo {self.lista_ruta} ")
+            print(f"rival {self.lista_ruta_rival} ")
+        if self.current == rival.nodogoal and self.primero == False:
+              self.lista_ruta = [self.current-1]   
+              return
         if self.primero:
             self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
             self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
             self.primero = False
             return
-        
+        if self.lista_ruta == []:
+           print("olah")
+           self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)    
+           print(f"nueva ruta{self.lista_ruta}")
+           return
+
         if rival.current == self.lista_ruta_rival[0]:
             self.lista_ruta_rival.pop(0)
         else:
@@ -22,11 +34,15 @@ class Jugador:
         if len(self.lista_ruta) < len(rival.lista_ruta):
                 return
         else:
-            print("nos van a ganar :c")
-            if self.nodogoal == (tablero.q_nodos - tablero.n // 2):
-                self.lista_ruta.insert(0,self.current - tablero.n)
-            else:
-                self.lista_ruta.insert(0,self.current + tablero.n)    
+            if self.alcostado(self.lista_ruta[0],rival.current, tablero.n) is True:
+                
+                self.lista_ruta = self.pensamiento.actualiza_ruta(self.current,rival.nodogoal)
+                print(self.lista_ruta)
+                return
+             
+    def alcostado(self,nodo1,nodo2,n):
+        return nodo1-1 is nodo2 or nodo1+1 is nodo2 or nodo1+n is nodo2 or nodo1-n is nodo2
+
     def validar_direccion(self, nodoI, nodoF, n):
         validar = nodoI-nodoF
         if (validar == n):
@@ -64,13 +80,18 @@ class Jugador:
                     self.current -= 1
                 else:
                     pass                
+            if self.current == self.lista_ruta[0]:
+                self.lista_ruta.pop(0)
+            else:
+                self.lista_ruta = self.pensamiento.actualiza_ruta(self.current,self.nodogoal)
+        print(self.current)        
         return self.current == self.nodogoal
 
-    def graficar(self, pantalla, pygame, n, lado):
+    def graficar(self, pantalla, pygame, n, lado,color):
         x = self.current%n
         y = self.current//n
         x1 = self.nodogoal%n
         y1 = self.nodogoal//n
         if self.primero == False:
             pygame.draw.rect(pantalla, blue, (x1*lado, y1*lado, lado, lado), 0)
-        pygame.draw.ellipse(pantalla, (100,100,100), (x*lado, y*lado, lado, lado), 0)
+        pygame.draw.ellipse(pantalla, color, (x*lado, y*lado, lado, lado), 0)
