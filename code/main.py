@@ -1,7 +1,6 @@
 from Quoridor import Quoridor
 import matplotlib.pyplot as plt
 def main():
-<<<<<<< HEAD
     eleccion = int(input("1. Para testear los algoritmos, 2.- Para visualizar un juego: "))
     if eleccion == 1:
         algoritmos = [1,2,3]
@@ -39,7 +38,6 @@ def main():
             board = int(input("Ingrese el tamaño del tablero mayor a 3  y menor a 50: "))
         game = Quoridor(board, 2)
         game.start()
-=======
     algoritmos = [1,2,3]
     titulo = ["Bellman Forf", "Dijikstra", "A Star"]
     tiempos = [] #guarda los tiempos
@@ -69,5 +67,4 @@ def main():
         #limpiamos
         tiempos.clear()
         tam.clear()
->>>>>>> 6d399c5badc68c348bbeff81a5c62b81f0205048
 main()
