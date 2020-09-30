@@ -7,18 +7,63 @@ class Jugador:
         self.lista_ruta = []
         self.lista_ruta_rival = []
         self.current = nodostart
-        self.primero = True
-    def piensa(self, rival):
+        self.primero = True    
+    def piensa(self, rival, tablero):
         if self.primero:
             self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
+            self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
             self.primero = False
-        #self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
+            return
+        
+        if rival.current == self.lista_ruta_rival[0]:
+            self.lista_ruta_rival.pop(0)
+        else:
+            self.lista_ruta_rival = self.pensamiento.actualiza_ruta(rival.current, rival.nodogoal)
+        if len(self.lista_ruta) < len(rival.lista_ruta):
+                return
+        else:
+            print("nos van a ganar :c")
+            if self.nodogoal == (tablero.q_nodos - tablero.n // 2):
+                self.lista_ruta.insert(0,self.current - tablero.n)
+            else:
+                self.lista_ruta.insert(0,self.current + tablero.n)    
+    def validar_direccion(self, nodoI, nodoF, n):
+        validar = nodoI-nodoF
+        if (validar == n):
+            return 0 #arriba a abajo
+        elif (validar == -n):
+            return  1 # arriba a abajo
+        elif (validar == -1):
+            return 2 #izquierda a derecha
+        elif (validar == 1):
+            return 3 #derecha a izquierda
 
-    def mueve(self, enemigo):
+    def mueve(self, enemigo, tablero):
+        inicial = self.current
         self.current = self.lista_ruta[0]
         self.lista_ruta.pop(0)
         if self.current == enemigo.current:
-            #ACA DEBE HACER EL SALTO
+            direccion = self.validar_direccion(inicial, self.current, tablero.n)
+            if direccion is 0:
+                if tablero.conectados(self.current, self.current - tablero.n):
+                    self.current -= tablero.n
+                else:
+                    pass    
+            elif direccion is 1:
+                if tablero.conectados(self.current, self.current + tablero.n):
+                    self.current += tablero.n
+                else:
+                    pass    
+            elif direccion is 2:
+                if tablero.conectados(self.current, self.current + 1):
+                    self.current += 1
+                else:
+                    pass    
+            elif direccion is 3:
+                if tablero.conectados(self.current, self.current - 1):
+                    self.current -= 1
+                else:
+                    pass                
         return self.current == self.nodogoal
 
     def graficar(self, pantalla, pygame, n, lado):

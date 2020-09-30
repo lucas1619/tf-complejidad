@@ -11,7 +11,7 @@ class Quoridor:
         self.lista_de_jugadores.append(
             Jugador(1, self.tablero.grafo, self.tablero.n // 2, (self.tablero.q_nodos - self.tablero.n // 2)))
         self.lista_de_jugadores.append(
-            Jugador(1, self.tablero.grafo, (self.tablero.q_nodos - self.tablero.n // 2) - 1, self.tablero.n // 2))
+            Jugador(1, self.tablero.grafo, (self.tablero.q_nodos - self.tablero.n // 2) , self.tablero.n // 2))
         if qjugadores == 4:
             self.lista_de_jugadores.append(
                 Jugador(1, self.tablero.grafo, (self.tablero.n * (self.tablero.n / 2 + 1)) - 1,
@@ -21,7 +21,7 @@ class Quoridor:
                         (self.tablero.n * (self.tablero.n / 2 + 1)) - 1))
     def start(self):
         pygame.init()
-        pygame.display.set_caption(u'Jessie uwu')
+        pygame.display.set_caption(u'Quoridor')
         pantalla = pygame.display.set_mode((792, 792))
         clock = pygame.time.Clock()
         is_running = True
@@ -34,7 +34,7 @@ class Quoridor:
         while is_running:
             if(self.ganador == True):
                 break
-            clock.tick(7)
+            clock.tick(1)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     is_running = False  
@@ -42,8 +42,8 @@ class Quoridor:
             self.tablero.graficar_tablero(pantalla, pygame)
             for jugador in self.lista_de_jugadores:
                 jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam)
-            self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % 2])
-            self.ganador = self.lista_de_jugadores[self.turno].mueve()
+            self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % 2], self.tablero)
+            self.ganador = self.lista_de_jugadores[self.turno].mueve(self.lista_de_jugadores[(self.turno + 1) % 2], self.tablero)
             self.turno = (self.turno + 1) % 2
             pygame.display.update()
 
