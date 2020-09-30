@@ -59,12 +59,16 @@ class Jugador:
         self.lista_ruta.pop(0)
         if self.current == enemigo.current:
             direccion = self.validar_direccion(inicial, self.current, tablero.n)
-            print(f"direccion {direccion}")
             if direccion is 0:
-                if tablero.conectados(self.current, self.current - tablero.n):
-                    self.current -= tablero.n
+                if self.current - tablero.n >= 0:
+                    if tablero.conectados(self.current, self.current - tablero.n):
+                        self.current -= tablero.n
+                    else:
+                        pass
                 else:
-                    pass
+                    self.current += 1
+                    self.lista_ruta = self.pensamiento.actualiza_ruta(self.current, self.nodogoal)
+                    return self.current == self.nodogoal
             elif direccion is 1:
                 if self.current + tablero.n < tablero.n:
                     if tablero.conectados(self.current, self.current + tablero.n):

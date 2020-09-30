@@ -13,7 +13,7 @@ class Quoridor:
         self.ganador = False
         self.lista_de_jugadores = []
         self.lista_de_jugadores.append(
-            Jugador(3, self.tablero.grafo, self.tablero.n // 2, (self.tablero.q_nodos - self.tablero.n // 2) - 1))
+            Jugador(2, self.tablero.grafo, self.tablero.n // 2, (self.tablero.q_nodos - self.tablero.n // 2) - 1))
         self.lista_de_jugadores.append(
             Jugador(1, self.tablero.grafo, (self.tablero.q_nodos - self.tablero.n // 2) - 1, self.tablero.n // 2))
         if qjugadores == 4:
