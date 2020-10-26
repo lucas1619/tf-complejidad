@@ -31,3 +31,7 @@ class Tablero:
 
     def conectados(self, nodo1, nodo2):
         return nodo2 in self.grafo[nodo1]
+    
+    def eliminar_nodo(self, lista, nodo):
+        self.grafo[lista].pop(nodo)
+
