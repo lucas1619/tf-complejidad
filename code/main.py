@@ -4,7 +4,7 @@ def main():
     eleccion = int(input("1. Para testear los algoritmos, 2.- Para visualizar un juego: "))
     if eleccion == 1:
         algoritmos = [1,2,3]
-        titulo = ["Bellman Forf", "Dijikstra", "A Star"]
+        titulo = ["Bellman Ford", "Dijikstra", "A Star"]
         tiempos = [] #guarda los tiempos
         tam = [] #guarda los tamaños
         for i,algoritmo in enumerate(algoritmos):

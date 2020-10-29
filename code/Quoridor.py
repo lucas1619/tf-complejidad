@@ -80,7 +80,7 @@ class Quoridor:
                 jugador.graficar(pantalla, pygame, self.tablero.n, self.tablero.tam, colores[i])
             self.lista_de_jugadores[self.turno].piensa(self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)], self.tablero)
             self.ganador = self.lista_de_jugadores[self.turno].mueve(self.lista_de_jugadores[(self.turno + 1) % len(self.lista_de_jugadores)],
-                                                                     self.tablero)
+                                                                    self.tablero)
             self.turno = (self.turno + 1) % len(self.lista_de_jugadores)
             pygame.display.update()
         pantalla.fill(blanco)

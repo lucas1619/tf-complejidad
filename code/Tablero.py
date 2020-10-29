@@ -33,5 +33,6 @@ class Tablero:
         return nodo2 in self.grafo[nodo1]
     
     def eliminar_nodo(self, lista, nodo):
-        self.grafo[lista].pop(nodo)
+        self.grafo[lista].remove(nodo)
+        self.grafo[nodo].remove(lista)
 
