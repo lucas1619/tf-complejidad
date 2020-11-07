@@ -30,9 +30,13 @@ class Tablero:
                 pantalla, negro, (coord['x']*self.tam, coord['y']*self.tam, self.tam, self.tam), 1)
 
     def conectados(self, nodo1, nodo2):
-        return nodo2 in self.grafo[nodo1]
+        return nodo2 in self.grafo[nodo1] and nodo1 in self.grafo[nodo2]
     
-    def eliminar_nodo(self, lista, nodo):
-        self.grafo[lista].remove(nodo)
-        self.grafo[nodo].remove(lista)
+    def eliminar_nodo(self, nodo1, nodo):
+        self.grafo[nodo1].remove(nodo)
+        self.grafo[nodo].remove(nodo1)
+    
+    def crear_conexion (self, nodo1, nodo):
+        self.grafo[nodo1].append(nodo)
+        self.grafo[nodo].append(nodo1)
 

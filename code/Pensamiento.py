@@ -73,6 +73,7 @@ class Pensamiento:
             if len(not_tested_nodes) == 0:
                 break
 
+
             current = not_tested_nodes[0].pos
             ruta.append(grafoo[current].padre)
             not_tested_nodes[0].visited = True
