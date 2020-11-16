@@ -40,7 +40,10 @@ class Tablero:
         if self.conectados(nodo1a, nodo2a) and self.conectados(nodo1b, nodo2b):
             self.eliminar_nodo(nodo1a, nodo2a)
             self.eliminar_nodo(nodo1b, nodo2b)
-            
+            return True
+        return False
+
+
     def crear_conexion (self, nodo1, nodo):
         self.grafo[nodo1].append(nodo)
         self.grafo[nodo].append(nodo1)
