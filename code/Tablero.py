@@ -32,14 +32,14 @@ class Tablero:
     def conectados(self, nodo1, nodo2):
         return nodo2 in self.grafo[nodo1] and nodo1 in self.grafo[nodo2]
 
-    def eliminar_conexion(self, nodo1, nodo2):
+    def eliminar_nodo(self, nodo1, nodo2):
             self.grafo[nodo1].remove(nodo2)
             self.grafo[nodo2].remove(nodo1)
             print(f'Se elimino la conexion entre el nodo {nodo1} y {nodo2}')
     def colocar_pared(self, nodo1a, nodo1b, nodo2a, nodo2b):
         if self.conectados(nodo1a, nodo2a) and self.conectados(nodo1b, nodo2b):
-            self.eliminar_conexion(nodo1a, nodo2a)
-            self.eliminar_conexion(nodo1b, nodo2b)
+            self.eliminar_nodo(nodo1a, nodo2a)
+            self.eliminar_nodo(nodo1b, nodo2b)
             print(f'Se coloco la pared entre los nodos {nodo1a}, {nodo1b} y {nodo2a}', {nodo2b})
     def crear_conexion (self, nodo1, nodo):
         self.grafo[nodo1].append(nodo)
