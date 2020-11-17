@@ -153,10 +153,9 @@ class Jugador:
             if self.grafo.colocar_pared(nodo1, nodo2, nodo3, nodo4):
                 return
             else:
-                for i in range(1,4):            
-                    if self.grafo.conectados(self.current - (n_grafo*i), self.current-(n_grafo*(i+1))) and self.grafo.conectados((self.current - (n_grafo*i))+1, self.current-(n_grafo*(i+1))+1):
-                        self.grafo.eliminar_nodo(self.current - (n_grafo*i), self.current-(n_grafo*(i+1))) 
-                        self.grafo.eliminar_nodo((self.current - (n_grafo*i))+1, self.current-(n_grafo*(i+1))+1)
+                for i in range(1,4):
+                    if self.grafo.colocar_pared(self.current - (n_grafo*i), self.current-(n_grafo*(i+1)),
+                    (self.current - (n_grafo*i))+1, self.current-(n_grafo*(i+1))+1):
                         break
                     if i == 3:
                         return -1
@@ -165,17 +164,15 @@ class Jugador:
         elif enemigo_current_anterior + n_grafo == enemigo.current:#me movi abajo
             nodo1, nodo2, nodo3, nodo4 = self.current, self.current + n_grafo, self.current + 1, (self.current +n_grafo)+1
             if self.grafo.colocar_pared(nodo1, nodo2, nodo3, nodo4):
-                return True
+                return 
             else:
-                for i in range(1,4):            
-                    if self.grafo.conectados(self.current + (n_grafo*i), self.current+(n_grafo*(i+1))) and self.grafo.conectados((self.current + (n_grafo*i))+1, self.current+(n_grafo*(i+1))+1):
-                        self.grafo.eliminar_nodo(self.current + (n_grafo*i), self.current+(n_grafo*(i+1))) 
-                        self.grafo.eliminar_nodo((self.current + (n_grafo*i))+1, self.current+(n_grafo*(i+1))+1)
+                for i in range(1,4):
+                    if self.grafo.colocar_pared(self.current + (n_grafo*i), self.current+(n_grafo*(i+1)),
+                    (self.current + (n_grafo*i))+1, self.current+(n_grafo*(i+1))+1):            
                         break
                     if i == 3:
                         return -1
                 return
-
 
         elif enemigo_current_anterior - 1 == enemigo.current:#me movi izquierda
             nodo1, nodo2, nodo3, nodo4 = self.current, self.current-1, self.current - n_grafo , (self.current- n_grafo)-1
@@ -183,18 +180,37 @@ class Jugador:
                 return True
             else:
                 for i in range(1,4):
-                    if self.grafo.conectados(self.current - (1*i) , self.current - (1*i) -1 ) and self.grafo.conectados(self.current - (1*i) - n_grafo , self.current - (1*i) -1 - n_grafo):
+                    if self.grafo.colocar_pared(self.current - (1*i) , self.current - (1*i) -1, self.current - (1*i) - n_grafo , self.current - (1*i) -1 - n_grafo):
                         break
-            
-
-
+                    if i == 3:
+                        return -1
+                return
 
         elif enemigo_current_anterior + 1 == enemigo.current:#me movi derecha
             nodo1, nodo2, nodo3, nodo4 = self.current, self.current+1, self.current - n_grafo, (self.current-n_grafo)+1
             if self.grafo.colocar_pared(nodo1, nodo2, nodo3, nodo4):
                 return True
+            else:
+                for i in range(1,4):
+                    if self.grafo.colocar_pared(self.current + (1*i) , self.current + (1*i) +1, self.   current + (1*i) - n_grafo , self.current + (1*i) +1 - n_grafo):
+                        break
+                    if i == 3:
+                        return -1
+                return
         #si no le puedo poner pared en un lugar, le pongo a la siguiente fila o columna
         #si ya no se puede, avanzo
+
+        def ofensivo(self, enemigo):
+            indicador = self.validar_direccion(enemigo.lista[0],enemigo.lista[1], self.grafo.n)
+            # 0 arriba, 1 abajo, 2 derecha, 3 izquierda
+            if indicador == 0:
+                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]-self.grafo.n,enemigo.lista[0]+1,enemigo.lista[0]-self.grafo.n +1 )
+            elif indicador == 1:
+                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]+self.grafo.n,enemigo.lista[0]+1,enemigo.lista[0]+self.grafo.n +1)
+            elif indicador == 2:
+                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]+1,enemigo.lista[0]+self.grafo.n, enemigo.lista[0]+self.grafo.n+1)
+            elif indicador == 3:
+                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]-1,enemigo.lista[0]+self.grafo.n, enemigo.lista[0]+self.grafo.n-1)
 
 
 
