@@ -201,16 +201,34 @@ class Jugador:
         #si ya no se puede, avanzo
 
         def ofensivo(self, enemigo):
-            indicador = self.validar_direccion(enemigo.lista[0],enemigo.lista[1], self.grafo.n)
+            se_pudo = True
+            for i in range(len(enemigo.lista_ruta)-1):
+                indicador = self.validar_direccion(enemigo.lista[i],enemigo.lista[i+1], self.grafo.n)
             # 0 arriba, 1 abajo, 2 derecha, 3 izquierda
-            if indicador == 0:
-                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]-self.grafo.n,enemigo.lista[0]+1,enemigo.lista[0]-self.grafo.n +1 )
-            elif indicador == 1:
-                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]+self.grafo.n,enemigo.lista[0]+1,enemigo.lista[0]+self.grafo.n +1)
-            elif indicador == 2:
-                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]+1,enemigo.lista[0]+self.grafo.n, enemigo.lista[0]+self.grafo.n+1)
-            elif indicador == 3:
-                self.grafo.colocar_pared(enemigo.lista[0],enemigo.lista[0]-1,enemigo.lista[0]+self.grafo.n, enemigo.lista[0]+self.grafo.n-1)
+                if indicador == 0:
+                    if (self.grafo.colocar_pared(enemigo.lista[i],enemigo.lista[i]-self.grafo.n,enemigo.lista[i]+1,enemigo.lista[i]-self.grafo.n +1)):
+                        break
+                    else:
+                        continue
+                elif indicador == 1:
+                    if (self.grafo.colocar_pared(enemigo.lista[i],enemigo.lista[i]+self.grafo.n,enemigo.lista[i]+1,enemigo.lista[i]+self.grafo.n +1)):
+                        break
+                    else:
+                        continue
+                elif indicador == 2:
+                    if (self.grafo.colocar_pared(enemigo.lista[i],enemigo.lista[i]+1,enemigo.lista[i]+self.grafo.n, enemigo.lista[i]+self.grafo.n+1)):
+                        break
+                    else:
+                        continue
+                elif indicador == 3:
+                    if (self.grafo.colocar_pared(enemigo.lista[i],enemigo.lista[i]-1,enemigo.lista[i]+self.grafo.n, enemigo.lista[i]+self.grafo.n-1)):
+                        break
+                    else:
+                        continue
+                if i == len(enemigo.lista_ruta)-1:
+                    #no se pudo poner pared
+                    se_pudo = False
+            return se_pudo
 
 
 

@@ -36,12 +36,23 @@ class Tablero:
             self.grafo[nodo1].remove(nodo2)
             self.grafo[nodo2].remove(nodo1)
             print(f'Se elimino la conexion entre el nodo {nodo1} y {nodo2}')
-    def colocar_pared(self, nodo1a, nodo1b, nodo2a, nodo2b):
-        if self.conectados(nodo1a, nodo2a) and self.conectados(nodo1b, nodo2b):
+    def colocar_pared(self, nodo1a, nodo1b, nodo2a, nodo2b, start, goal, enemigo):
+
+        if (nodo1a <= (self.q_nodos) and nodo1a >=0) and(nodo1b <= (self.q_nodos) and nodo1b >=0) and (nodo2a <= (self.q_nodos) and nodo2a >=0) and (nodo2b <= (self.q_nodos) and nodo2b >=0): #valida bordes
+            pass
+        else:
+            return False #valida bordes
+
+        if self.conectados(nodo1a, nodo2a) and self.conectados(nodo1b, nodo2b): #valida conexion entre nodos
             self.eliminar_nodo(nodo1a, nodo2a)
             self.eliminar_nodo(nodo1b, nodo2b)
+
+        if enemigo.pensamiento.actualiza_ruta(start, goal)!=[]: #valida que lo encierre
             return True
-        return False
+        else:
+            self.crear_conexion(nodo1a, nodo2a) #si lo encerro, destruye lo que se hizo
+            self.crear_conexion(nodo1b, nodo2b)
+            return False
 
 
     def crear_conexion (self, nodo1, nodo):
