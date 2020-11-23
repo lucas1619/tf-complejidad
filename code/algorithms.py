@@ -41,8 +41,6 @@ def dijkstra(G, start, goal):
 
                         nodo_distancia_minima = anterior[nodo_distancia_minima]
 
-
-
                     return S
 def astar(G, origin, goal):
     return nx.astar_path(G, origin, goal)
