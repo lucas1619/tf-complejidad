@@ -5,22 +5,30 @@ import networkx as nx
 import pygame, sys
 from pygame.locals import *
 import time
+
+strategies = [astar, bellman_ford, dijkstra]
+
+
 class Game:
-    def __init__(self, n_players, size, graphic=None):
+    def __init__(self, n_players, size, graphic=None, max_depth=4, strats=[]):
+        self.max_deth = max_depth
         self.board = Board(size)
         self.players = [None] * n_players
         self.graphic = size <= 18 if graphic is None else graphic
         key_pos1 = size // 2
         key_pos2 = (size // 2) * size
         if len(self.players) == 2:
-            self.players[0] = Player(dijkstra, key_pos1, key_pos1 + (size * (size - 1)), 1, (0, 0, 255))
-            self.players[1] = Player(bellman_ford, key_pos1 + (size * (size - 1)), key_pos1, 1, (0, 255, 0))
+            if not strats:
+                strats = [0, 1]
+            self.players[0] = Player(strategies[strats[0]], key_pos1, key_pos1 + (size * (size - 1)), 1, (0, 0, 255))
+            self.players[1] = Player(strategies[strats[1]], key_pos1 + (size * (size - 1)), key_pos1, 1, (0, 255, 0))
         elif len(self.players) == 4:
-            self.players[0] = Player(dijkstra, key_pos1, key_pos1 + (size * (size - 1)), 1, (0, 0, 255))
-            self.players[1] = Player(bellman_ford, key_pos1 + (size * (size - 1)), key_pos1, 1, (0, 255, 0))
-
-            self.players[2] = Player(astar, key_pos2, key_pos2 + (size - 1), 1, (0, 0, 0))
-            self.players[3] = Player(dijkstra, key_pos2 + (size - 1), key_pos2, 1, (255, 255, 255))
+            if not strats:
+                strats = [0, 1, 2, 1]
+            self.players[0] = Player(strategies[strats[0]], key_pos1, key_pos1 + (size * (size - 1)), 1, (0, 0, 255))
+            self.players[1] = Player(strategies[strats[1]], key_pos1 + (size * (size - 1)), key_pos1, 1, (0, 255, 0))
+            self.players[2] = Player(strategies[strats[2]], key_pos2, key_pos2 + (size - 1), 1, (0, 0, 0))
+            self.players[3] = Player(strategies[strats[3]], key_pos2 + (size - 1), key_pos2, 1, (255, 255, 255))
         for player in self.players:
             if size % 2 == 0:
                 player.walls = size / len(self.players)
@@ -234,7 +242,7 @@ class Game:
         return end - start
 
     def paranoid(self, board, depth, player, players):
-        if depth == 4:
+        if depth == len(players) * self.max_deth:
             return self.evaluate_position(players[player], players, board.G)
         if depth % len(self.players) == 0:
             max_score = float('-inf')
